@@ -1,0 +1,177 @@
+.login {
+  min-height: 100%;
+  background-color: #ffffff;
+
+  &-container {
+    display: flex;
+    flex-wrap: wrap-reverse;
+
+    &__left {
+      display: flex;
+      flex: 1 375px;
+      overflow: hidden;
+      min-height: 600px;
+
+      .ant-carousel {
+        width: 100%;
+
+        .login-banner {
+          width: 100%;
+          height: 100%;
+          background: #0065f4;
+
+          &__item {
+            padding: 60px 30px;
+            .login-banner__container {
+              background-size: contain;
+              background-position: center;
+              background-repeat: no-repeat;
+            }
+
+            &.banner-1 {
+              .login-banner__container {
+                background-image: url('../assets/demo/banner.png');
+              }
+            }
+          }
+
+          .slick-list,
+          .slick-track,
+          .slick-slide,
+          .slick-slide div {
+            height: 100%;
+          }
+
+          .slick-dots.slick-dots-bottom {
+            bottom: 30px;
+
+            li {
+              width: 10px;
+              height: 10px;
+              border-radius: 50%;
+
+              button {
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &__right {
+      display: flex;
+      flex: 1 375px;
+      align-items: center;
+      justify-content: center;
+
+      .login-card {
+        width: 400px;
+        padding: 60px 30px;
+
+        .login-form {
+          &__headline {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+          }
+
+          &__button {
+            width: 100%;
+          }
+
+          &__agreement {
+            color: #64748b;
+            line-height: 24px;
+            margin: 0 0 30px 0;
+
+            .ant-checkbox {
+              margin-top: 4px;
+              align-self: flex-start;
+            }
+
+            &-link {
+              color: #181f32;
+              font-weight: 500;
+              margin: 0 3px;
+            }
+          }
+
+          .ant-form-item-control-input {
+            .ant-input-prefix {
+              margin-inline-end: 10px;
+            }
+          }
+        }
+
+        .login {
+          &__auth-connections {
+            width: 100%;
+            justify-content: space-between;
+
+            .ant-space-item {
+              width: 50%;
+
+              button {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+
+                .icon-google,
+                .icon-facebook {
+                  display: inline-block;
+                  width: 16px;
+                  height: 16px;
+                  background-size: contain;
+                  background-position: center;
+                  background-repeat: no-repeat;
+                }
+
+                .icon-google {
+                  background-image: url('../assets/icon/icon-google.png');
+                }
+
+                .icon-facebook {
+                  background-image: url('../assets/icon/icon-facebook.png');
+                }
+              }
+            }
+          }
+
+          &__helper-actions {
+            color: #151d2f;
+            margin-top: 20px;
+            text-align: center;
+
+            a {
+              color: #2563eb;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .login-container__left {
+    flex: 0 0 450px;
+
+    .ant-carousel .login-banner__item {
+      padding: 60px 20px;
+    }
+  }
+}
+
+@media (max-width: 960px) {
+  .login-container__left {
+    display: none;
+
+    .ant-carousel .login-banner__item {
+      padding: 60px 10px;
+    }
+  }
+}

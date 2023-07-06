@@ -1,0 +1,18 @@
+.ead-table {
+  &.ant-table-wrapper {
+    .ead-table {
+      &__actions {
+        &.ant-table-cell {
+          font-size: 20px;
+          text-align: center;
+        }
+      }
+    
+      &__more-button {
+        .anticon.anticon-ellipsis {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+$color-success: #25D164;
+$color-warning: #F6A723;
+$color-danger: #ED4F9D;
+
+.color {
+  &-success {
+    color: $color-success;
+  }
+  
+  &-warning {
+    color: $color-warning;
+  }
+
+  &-danger {
+    color: $color-danger;
+  }
+}

@@ -1,0 +1,191 @@
+:global .allocation-container {
+  min-width: 100%;
+
+  .ant-row {
+    margin-bottom: 20px;
+  }
+}
+
+.actionRow {
+  display: flex;
+  margin-bottom: 20px;
+  align-items: center;
+  justify-content: space-between;
+
+  .button {
+    padding: 12px 16px;
+    line-height: initial;
+    height: initial;
+    background-color: rgba(36, 99, 235, 1);
+    border-radius: 10px;
+    min-width: 8em;
+    font-weight: bold;
+  }
+}
+
+.summaryRow {
+  display: flex;
+  margin-bottom: 20px;
+  font-weight: bold;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px 0 rgba(0, 0, 0, 0.02);
+
+  :global {
+    .ant-col {
+      position: relative;
+      background-color: #ffffff;
+
+      &::after {
+        position: absolute;
+        content: "";
+        width: 1px;
+        top: 25px;
+        bottom: 25px;
+        right: 0;
+        background-color: #e9ecf1;
+        transform: translateX(-50%);
+      }
+
+      &:last-child {
+        &::after {
+          content: none;
+        }
+      }
+    }
+  }
+
+  .item {
+    padding: 12px;
+  }
+  .itemHeader {
+    display: flex;
+  }
+  .itemLabel {
+    flex: 1;
+    font-size: 13px;
+    color: #535353;
+    margin-bottom: 16px;
+  }
+  .itemFigure {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  .itemAmount {
+    font-size: 18px;
+    min-width: 6em;
+    margin-right: 12px;
+  }
+  .itemRate {
+    border: none;
+    border-radius: 10px;
+  }
+  .itemPast {
+    font-size: 12px;
+    color: #535353;
+    line-height: 20px;
+    margin-top: 6px;
+  }
+}
+
+.allocationCard {
+  .titleCol {
+    .titleText {
+    }
+    .titleTooltip {
+      font-size: 16px;
+      color: rgba(0, 0, 0, 0.25);
+      margin-left: 5px;
+      cursor: pointer;
+    }
+  }
+
+  .moreButton {
+    :global {
+      .anticon.anticon-ellipsis {
+        font-size: 20px;
+      }
+    }
+
+    &:hover:not(:disabled) {
+      color: #2563eb;
+      background-color: transparent;
+    }
+
+    &:focus-visible:not(:disabled) {
+      outline: none;
+      outline-offset: initial;
+    }
+  }
+}
+
+$chartHeight1: 300px;
+
+.sankeyCard,
+.donutCard {
+  :global {
+    .ant-card-head {
+      padding: 0 16px;
+    }
+    .ant-card-body {
+      position: relative;
+      width: 100%;
+      height: $chartHeight1;
+      padding: 16px;
+    }
+  }
+}
+
+.sankeyCard {
+  .sankeyChart {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.donutCard {
+  .donutChart {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+$chartHeight2: 360px;
+
+.greenPowerCard,
+.worldMapCard {
+  :global {
+    .ant-card-head {
+      padding: 0 16px;
+    }
+    .ant-card-body {
+      position: relative;
+      width: 100%;
+      height: $chartHeight2;
+      padding: 16px;
+    }
+  }
+}
+
+.greenPowerCard {
+  .greenPowerChart {
+    width: 100%;
+    height: 100%;
+
+    .greenPowerChartWrap {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+.worldMapCard {
+  .worldMapChart {
+    width: 100%;
+    height: 100%;
+
+    .worldMapChartWrap {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

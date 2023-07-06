@@ -1,0 +1,38 @@
+.ead-justify-grid {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  
+  &__col {
+    display: flex;
+    flex: auto;
+    font-size: 0;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  &__col--left, 
+  &__col:first-child {
+    justify-content: flex-start;
+  }
+
+  &__col--right,
+  &__col--right:first-child {
+    justify-content: flex-end;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+
+    &-title {
+      display: inline-flex;
+      font-size: 14px;
+      font-weight: 600;
+      flex: 1;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+}

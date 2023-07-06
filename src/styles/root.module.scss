@@ -1,0 +1,108 @@
+.pageContent {
+  position: relative;
+  width: 100%;
+  background: #f8fafc;
+  padding: 24px 16px;
+  overflow: scroll;
+}
+
+.pageHeader {
+  color: currentColor;
+  padding: 20px;
+  background: #ffffff;
+  height: 80px;
+}
+
+.sider {
+  position: relative;
+
+  &::after {
+    position: absolute;
+    content: '';
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 1px;
+    background-color: #f1f5f9;
+    transform: translateX(50%);
+  }
+}
+
+.siderHeader {
+  position: relative;
+  display: flex;
+  font-size: 17px;
+  height: 80px;
+  padding: 0 16px;
+  margin: 0;
+  align-items: center;
+
+  &::after {
+    position: absolute;
+    content: '';
+    left: 12px;
+    right: 12px;
+    bottom: 0;
+    height: 1px;
+    background-color: #f1f5f9;
+    transform: translateY(50%);
+  }
+}
+
+.productLogo {
+  display: inline-flex;
+  font-size: 14px;
+  color: #ffffff;
+  width: 25px;
+  height: 25px;
+  margin-right: 8px;
+  background-color: #2563eb;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
+}
+
+.headerTitle {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+  line-height: 1;
+}
+
+.headerDesc {
+  font-size: 12px;
+  color: #687c93;
+  margin-top: 10px;
+  line-height: 1;
+}
+
+.entryMenu {
+  flex: 1;
+  padding: 12px 8px;
+}
+
+.actionMenu {
+  padding: 12px 8px;
+  margin-top: auto;
+}
+
+.pageLayout {
+  height: 100vh;
+}
+
+:global {
+  #page-container {
+    height: initial;
+    width: 100%;
+  }
+
+  .ant-layout {
+    &-sider {
+      &-children {
+        display: flex;
+        flex-direction: column;
+        height: initial;
+      }
+    }
+  }
+}

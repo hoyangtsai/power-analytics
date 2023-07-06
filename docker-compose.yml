@@ -1,0 +1,16 @@
+version: '3' 
+
+services:   
+  app:
+    image: hoyangtsai/power-analytics
+    container_name: power-analytics
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      - NODE_ENV=production
+    ports:
+      - 9000:9000
+    volumes:
+      - ./:/usr/app

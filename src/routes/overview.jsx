@@ -2,10 +2,7 @@ import { useCallback, useEffect, useRef, useState, useContext } from 'react';
 import * as echarts from 'echarts/core';
 import { LineChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
-import {
-  TooltipComponent,
-  LegendComponent,
-} from 'echarts/components';
+import { TooltipComponent, LegendComponent } from 'echarts/components';
 
 import dayjs from 'dayjs';
 import clsx from 'clsx';
@@ -18,7 +15,7 @@ import {
   RightOutlined,
   EllipsisOutlined,
   GoldOutlined,
-  FundOutlined
+  FundOutlined,
 } from '@ant-design/icons';
 import {
   Row,
@@ -31,15 +28,10 @@ import {
   Segmented,
   Table,
   Tag,
-  Tooltip
-} from 'antd'
+  Tooltip,
+} from 'antd';
 
-echarts.use([
-  LineChart,
-  CanvasRenderer,
-  TooltipComponent,
-  LegendComponent,
-]);
+echarts.use([LineChart, CanvasRenderer, TooltipComponent, LegendComponent]);
 
 import useWindowSize from '../hooks/useWindowSize';
 import usePrevious from '../hooks/usePrevious';
@@ -59,14 +51,21 @@ const summary = [
     unit: 'kWh',
     rate: 12,
     modifier: '>',
-    icon: <div className={styles.itemIcon} style={{
-      background: '#FFFBE9'
-    }}>
-      <ShoppingCartOutlined style={{
-        fontSize: 20,
-        color: '#FFA200'
-      }} />
-    </div>
+    icon: (
+      <div
+        className={styles.itemIcon}
+        style={{
+          background: '#FFFBE9',
+        }}
+      >
+        <ShoppingCartOutlined
+          style={{
+            fontSize: 20,
+            color: '#FFA200',
+          }}
+        />
+      </div>
+    ),
   },
   {
     label: '年總用電量',
@@ -74,14 +73,21 @@ const summary = [
     unit: 'kWh',
     rate: 36,
     modifier: '>',
-    icon: <div className={styles.itemIcon} style={{
-      background: '#EDF6FF'
-    }}>
-      <DollarOutlined style={{
-        fontSize: 20,
-        color: '#0064F4'
-      }} />
-    </div>
+    icon: (
+      <div
+        className={styles.itemIcon}
+        style={{
+          background: '#EDF6FF',
+        }}
+      >
+        <DollarOutlined
+          style={{
+            fontSize: 20,
+            color: '#0064F4',
+          }}
+        />
+      </div>
+    ),
   },
   {
     label: '餘電電費',
@@ -89,14 +95,21 @@ const summary = [
     unit: '$',
     rate: 5,
     modifier: '<',
-    icon: <div className={styles.itemIcon} style={{
-      background: '#FFF2F8'
-    }}>
-      <HistoryOutlined style={{
-        fontSize: 20,
-        color: '#FF46A3'
-      }} />
-    </div>
+    icon: (
+      <div
+        className={styles.itemIcon}
+        style={{
+          background: '#FFF2F8',
+        }}
+      >
+        <HistoryOutlined
+          style={{
+            fontSize: 20,
+            color: '#FF46A3',
+          }}
+        />
+      </div>
+    ),
   },
   {
     label: '成本',
@@ -104,15 +117,22 @@ const summary = [
     unit: '$',
     rate: 0,
     modifier: '=',
-    icon: <div className={styles.itemIcon} style={{
-      background: '#F8FAFD'
-    }}>
-      <DollarOutlined style={{
-        fontSize: 20,
-        color: '#00C0FE'
-      }} />
-    </div>
-  }
+    icon: (
+      <div
+        className={styles.itemIcon}
+        style={{
+          background: '#F8FAFD',
+        }}
+      >
+        <DollarOutlined
+          style={{
+            fontSize: 20,
+            color: '#00C0FE',
+          }}
+        />
+      </div>
+    ),
+  },
 ];
 
 const industryTableData = [
@@ -123,7 +143,7 @@ const industryTableData = [
     type: 'HV3',
     no: '04-0701234567890',
     kWh: '34,067',
-    price: '$4.90'
+    price: '$4.90',
   },
   {
     key: '2',
@@ -132,7 +152,7 @@ const industryTableData = [
     type: 'HV3',
     no: '04-0901234567890',
     kWh: '11,273',
-    price: '$4.90'
+    price: '$4.90',
   },
   {
     key: '3',
@@ -141,7 +161,7 @@ const industryTableData = [
     type: 'HV3',
     no: '04-4101234567890',
     kWh: '32,743',
-    price: '$5.80'
+    price: '$5.80',
   },
 ];
 
@@ -159,7 +179,9 @@ const dropdownActions = [
 export default function Overview() {
   const powerMixRef = useRef(null);
   const powerMixChart = useRef(null);
-  const [powerMixDefaultDate, setPowerMixDefaultDate] = useState(dayjs('2022/01/02'));
+  const [powerMixDefaultDate, setPowerMixDefaultDate] = useState(
+    dayjs('2022/01/02')
+  );
   const conversionPowerRef = useRef(null);
   const conversionPowerChart = useRef(null);
   const [width, height] = useWindowSize();
@@ -175,10 +197,12 @@ export default function Overview() {
       powerMixChart.current.setOption(powerMix);
     }
     if (conversionPowerRef.current && !conversionPowerChart.current) {
-      conversionPowerChart.current = await echarts.init(conversionPowerRef.current);
+      conversionPowerChart.current = await echarts.init(
+        conversionPowerRef.current
+      );
       conversionPowerChart.current.setOption(conversionPower);
     }
-  }
+  };
 
   const resizeCharts = () => {
     if (powerMixChart.current) {
@@ -187,7 +211,7 @@ export default function Overview() {
     if (conversionPowerChart.current) {
       setTimeout(() => conversionPowerChart.current.resize(), 200);
     }
-  }
+  };
 
   if (prevWidth !== width || prevHeight !== height) {
     resizeCharts();
@@ -216,32 +240,32 @@ export default function Overview() {
 
   return (
     <div className="overview-container">
-      <Row
-        gutter={[16, 16]}
-        className={styles.summaryRow}
-      >
-        {
-          summary.map((item, key) => {
-            return (
-              <Col xs={24} sm={12} xxl={6} className={styles.item} key={key}>
-                <Card className={clsx(styles.overviewCard, styles.itemRow)}>
-                  {item.icon}
-                  <div className={styles.itemNumbers}>
-                    <div className={styles.itemLabel}>{item.label}</div>
-                    <div className={styles.itemFigure}>
-                      <span className={styles.itemAmount}>{item.unit} {(item.amount).toLocaleString('en')}</span>
-                      {
-                        item.rate != 0 ?
-                          <Tag className={styles.itemRate} color={item.modifier == '<' ? 'error' : 'success'}>{item.modifier == '<' ? '↓' : '↑'} {item.rate}%</Tag> :
-                          null
-                      }
-                    </div>
+      <Row gutter={[16, 16]} className={styles.summaryRow}>
+        {summary.map((item, key) => {
+          return (
+            <Col xs={24} sm={12} xxl={6} className={styles.item} key={key}>
+              <Card className={clsx(styles.overviewCard, styles.itemRow)}>
+                {item.icon}
+                <div className={styles.itemNumbers}>
+                  <div className={styles.itemLabel}>{item.label}</div>
+                  <div className={styles.itemFigure}>
+                    <span className={styles.itemAmount}>
+                      {item.unit} {item.amount.toLocaleString('en')}
+                    </span>
+                    {item.rate != 0 ? (
+                      <Tag
+                        className={styles.itemRate}
+                        color={item.modifier == '<' ? 'error' : 'success'}
+                      >
+                        {item.modifier == '<' ? '↓' : '↑'} {item.rate}%
+                      </Tag>
+                    ) : null}
                   </div>
-                </Card>
-              </Col>
-            )
-          })
-        }
+                </div>
+              </Card>
+            </Col>
+          );
+        })}
       </Row>
       <Row gutter={[16, 16]}>
         <Col xs={24} sm={24} md={24} lg={14} xl={16} xxl={18}>
@@ -251,12 +275,27 @@ export default function Overview() {
             extra={
               <div className={styles.actions}>
                 <div className={styles.ranges}>
-                  <Segmented className={styles.rangeButton} options={['Day', 'Month', 'Year']} />
+                  <Segmented
+                    className={styles.rangeButton}
+                    options={['Day', 'Month', 'Year']}
+                  />
                 </div>
                 <div className={styles.datePicker}>
-                  <Button className={styles.prevButton} icon={<LeftOutlined />} onClick={() => handlePowerMixDateShift(-1)} />
-                  <DatePicker className={styles.datePickerInput} value={powerMixDefaultDate} suffixIcon={null} />
-                  <Button className={styles.nextButton} icon={<RightOutlined />} onClick={() => handlePowerMixDateShift(1)} />
+                  <Button
+                    className={styles.prevButton}
+                    icon={<LeftOutlined />}
+                    onClick={() => handlePowerMixDateShift(-1)}
+                  />
+                  <DatePicker
+                    className={styles.datePickerInput}
+                    value={powerMixDefaultDate}
+                    suffixIcon={null}
+                  />
+                  <Button
+                    className={styles.nextButton}
+                    icon={<RightOutlined />}
+                    onClick={() => handlePowerMixDateShift(1)}
+                  />
                 </div>
               </div>
             }
@@ -270,18 +309,30 @@ export default function Overview() {
             title={
               <div className={styles.titleCol}>
                 <div className={styles.title}>轉供電量</div>
-                <div className={styles.amount}>kWh {(3701).toLocaleString('en')}<span className={styles.rate}>-20%</span></div>
+                <div className={styles.amount}>
+                  kWh {(3701).toLocaleString('en')}
+                  <span className={styles.rate}>-20%</span>
+                </div>
               </div>
             }
             extra={
               <Select
                 className={styles.selectWeek}
                 placeholder="週"
-                options={[...Array(52).keys()].reduce((prev, curr) => [...prev, { value: curr + 1, label: curr + 1 }], [])}
+                options={[...Array(52).keys()].reduce(
+                  (prev, curr) => [
+                    ...prev,
+                    { value: curr + 1, label: curr + 1 },
+                  ],
+                  []
+                )}
               />
             }
           >
-            <div className={styles.conversionPowerChart} ref={conversionPowerRef}></div>
+            <div
+              className={styles.conversionPowerChart}
+              ref={conversionPowerRef}
+            ></div>
           </Card>
         </Col>
       </Row>
@@ -291,14 +342,18 @@ export default function Overview() {
             className={styles.overviewCard}
             title="廠區電力資料"
             extra={
-              <DatePicker defaultValue={dayjs()} format={customWeekStartEndFormat} picker="week" />
+              <DatePicker
+                defaultValue={dayjs()}
+                format={customWeekStartEndFormat}
+                picker="week"
+              />
             }
           >
             <Table
               className="ead-table"
               dataSource={industryTableData}
               rowSelection={{
-                type: 'checkbox'
+                type: 'checkbox',
               }}
               pagination={false}
             >
@@ -309,7 +364,12 @@ export default function Overview() {
                 ellipsis={{ showTitle: false }}
                 render={(_, { industry, logo }) => (
                   <div className={styles.industry}>
-                    <i className={styles.industryLogo} style={{ backgroundImage: logo != '' ? `url(${logo})` : 'none' }}></i>
+                    <i
+                      className={styles.industryLogo}
+                      style={{
+                        backgroundImage: logo != '' ? `url(${logo})` : 'none',
+                      }}
+                    ></i>
                     <span className={styles.industryName}>{industry}</span>
                   </div>
                 )}
@@ -326,7 +386,9 @@ export default function Overview() {
                 key="no"
                 ellipsis={{ showTitle: false }}
                 render={(no) => (
-                  <Tooltip placement="topLeft" title={no}>{no}</Tooltip>
+                  <Tooltip placement="topLeft" title={no}>
+                    {no}
+                  </Tooltip>
                 )}
               />
               <Column
@@ -343,9 +405,7 @@ export default function Overview() {
               />
               <Column
                 className="ead-table__actions"
-                title={
-                  <EllipsisOutlined />
-                }
+                title={<EllipsisOutlined />}
                 width={60}
                 dataIndex="more"
                 key="more"
@@ -370,10 +430,7 @@ export default function Overview() {
             className={clsx(styles.overviewCard, styles.greenPower)}
             title="綠能總結"
             extra={
-              <Dropdown
-                menu={{ items: dropdownActions }}
-                trigger={['click']}
-              >
+              <Dropdown menu={{ items: dropdownActions }} trigger={['click']}>
                 <Button
                   className={styles.moreButton}
                   type="text"
@@ -385,7 +442,9 @@ export default function Overview() {
             <div className={styles.greenPowerWrap}>
               <Row gutter={[16, 16]} className={styles.greenPowerItems}>
                 <Col span={8}>
-                  <Card className={clsx(styles.greenPowerItem, styles.surplusPower)}>
+                  <Card
+                    className={clsx(styles.greenPowerItem, styles.surplusPower)}
+                  >
                     <div className={styles.GPHeader}>
                       <i className={styles.GPIcon}>
                         <GoldOutlined />
@@ -411,7 +470,9 @@ export default function Overview() {
                   </Card>
                 </Col>
                 <Col span={8}>
-                  <Card className={clsx(styles.greenPowerItem, styles.grayPower)}>
+                  <Card
+                    className={clsx(styles.greenPowerItem, styles.grayPower)}
+                  >
                     <div className={styles.GPHeader}>
                       <i className={styles.GPIcon}>
                         <FundOutlined />

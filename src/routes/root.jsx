@@ -1,6 +1,16 @@
 import React, { useCallback, useState, createContext } from 'react';
 import { Outlet, NavLink, Navigate, useLocation } from 'react-router-dom';
-import { Layout, Menu, Input, Dropdown, Avatar, Badge, Button, Popover, Empty } from 'antd';
+import {
+  Layout,
+  Menu,
+  Input,
+  Dropdown,
+  Avatar,
+  Badge,
+  Button,
+  Popover,
+  Empty,
+} from 'antd';
 import {
   AppstoreFilled,
   BarChartOutlined,
@@ -13,9 +23,9 @@ import {
   LogoutOutlined,
   ThunderboltFilled,
   UserOutlined,
-  BellOutlined
+  BellOutlined,
 } from '@ant-design/icons';
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux';
 
 import { setLogin, setUserInfo } from '../features/user/userSlice';
 import ErrorPage from '../error-page';
@@ -83,31 +93,31 @@ export const routers = [
   {
     name: 'login',
     path: '/login',
-    element: <Login />
+    element: <Login />,
   },
   {
     name: 'signup',
     path: '/signup',
-    element: <SignUp />
-  }
+    element: <SignUp />,
+  },
 ];
 
 const userActionItems = [
   {
     key: '1',
-    label: '個人中心'
+    label: '個人中心',
   },
   {
     key: '2',
-    label: '登出'
-  }
+    label: '登出',
+  },
 ];
 
 const { Search } = Input;
 
 const siderDefaultValue = {
   collapsed: false,
-  type: 'responsive'
+  type: 'responsive',
 };
 
 export const SiderContext = createContext(siderDefaultValue);
@@ -116,9 +126,15 @@ const menuItems = routers[0].children.map((entry, index) => {
   return {
     key: index,
     icon: React.createElement(entry.icon),
-    label: entry.disabled ? entry.label : <NavLink key={entry.path || 'index'} to={entry.path}>{entry.label}</NavLink>,
+    label: entry.disabled ? (
+      entry.label
+    ) : (
+      <NavLink key={entry.path || 'index'} to={entry.path}>
+        {entry.label}
+      </NavLink>
+    ),
     disabled: entry.disabled,
-  }
+  };
 });
 
 const bottomMenuItems = [
@@ -132,7 +148,7 @@ const bottomMenuItems = [
     key: 'logout',
     icon: <LogoutOutlined />,
     label: '登出',
-  }
+  },
 ];
 
 export default function Root() {
@@ -143,36 +159,43 @@ export default function Root() {
 
   const getMenuSelectKey = () => {
     const rootPages = routers[0].children;
-    const pageIndex = rootPages.findIndex(p => location.pathname.includes(p.path));
+    const pageIndex = rootPages.findIndex((p) =>
+      location.pathname.includes(p.path)
+    );
     return pageIndex === -1 ? ['0'] : [String(pageIndex)];
-  }
+  };
 
   const getHeaderTitle = () => {
     const rootPages = routers[0].children;
-    const currentPage = rootPages.find(p => location.pathname.includes(p.path));
+    const currentPage = rootPages.find((p) =>
+      location.pathname.includes(p.path)
+    );
     if (currentPage) {
       return (
         <>
           <p className={styles.headerTitle}>{currentPage.label}</p>
           <div className={styles.headerDesc}>{currentPage.description}</div>
         </>
-      )
+      );
     }
     return (
       <>
         <p className={styles.headerTitle}>{rootPages[0].label}</p>
         <div className={styles.headerDesc}>{rootPages[0].description}</div>
       </>
-    )
-  }
+    );
+  };
 
-  const handleActionMenu = useCallback((item) => {
-    const { key } = item;
-    if (key === 'logout') {
-      dispatch(setLogin(false));
-      dispatch(setUserInfo({}));
-    }
-  }, [dispatch]);
+  const handleActionMenu = useCallback(
+    (item) => {
+      const { key } = item;
+      if (key === 'logout') {
+        dispatch(setLogin(false));
+        dispatch(setUserInfo({}));
+      }
+    },
+    [dispatch]
+  );
 
   if (!user.isLogin) {
     return <Navigate to="login" />;
@@ -215,7 +238,11 @@ export default function Root() {
               </div>
               <div className="ead-justify-grid__col ead-justify-grid__col--right">
                 <div className="ead-navbar__operation">
-                  <Search className="ead-navbar__operation-item ead-search" placeholder="Search anything" allowClear />
+                  <Search
+                    className="ead-navbar__operation-item ead-search"
+                    placeholder="Search anything"
+                    allowClear
+                  />
                   <Popover
                     className="ead-navbar__operation-item ead-navbar__popover notifications-list"
                     content={
@@ -228,7 +255,11 @@ export default function Root() {
                     trigger="click"
                   >
                     <Badge>
-                      <Button className="notifications-list__button" type="text" icon={<BellOutlined />} />
+                      <Button
+                        className="notifications-list__button"
+                        type="text"
+                        icon={<BellOutlined />}
+                      />
                     </Badge>
                   </Popover>
                   <Dropdown
@@ -241,9 +272,7 @@ export default function Root() {
               </div>
             </div>
           </Header>
-          <Content
-            className={styles.pageContent}
-          >
+          <Content className={styles.pageContent}>
             <Outlet />
           </Content>
         </Layout>

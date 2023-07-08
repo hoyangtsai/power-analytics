@@ -1,8 +1,4 @@
-import {
-  UserOutlined,
-  MailOutlined,
-  LockOutlined
-} from '@ant-design/icons';
+import { UserOutlined, MailOutlined, LockOutlined } from '@ant-design/icons';
 import {
   Layout,
   Space,
@@ -15,7 +11,7 @@ import {
   message,
 } from 'antd';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
 import '../styles/login.scss';
@@ -26,13 +22,13 @@ const { Content } = Layout;
 
 export default function SignUp() {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user);
+  const user = useSelector((state) => state.user);
   const [messageApi, contextHolder] = message.useMessage();
 
   const onFinish = async (values) => {
     const { username, email, password, agreement } = values;
     const users = await getUsers();
-    const matchUser = users.find(u => u.email === email);
+    const matchUser = users.find((u) => u.email === email);
     if (!agreement) {
       messageApi.open({
         type: 'error',
@@ -59,7 +55,9 @@ export default function SignUp() {
 
   const validatePassword = async (_, value) => {
     if (value && value.length < 8) {
-      return Promise.reject('Your password is not strong enough. Use at least 8 characters');
+      return Promise.reject(
+        'Your password is not strong enough. Use at least 8 characters'
+      );
     }
     return Promise.resolve();
   };
@@ -77,13 +75,22 @@ export default function SignUp() {
           <div className="login-container__left">
             <Carousel className="login-banner">
               <div className="login-banner__item banner-1">
-                <div className="login-banner__container" style={{ height: '100%' }}></div>
+                <div
+                  className="login-banner__container"
+                  style={{ height: '100%' }}
+                ></div>
               </div>
               <div className="login-banner__item banner-2">
-                <div className="login-banner__container" style={{ height: '100%' }}></div>
+                <div
+                  className="login-banner__container"
+                  style={{ height: '100%' }}
+                ></div>
               </div>
               <div className="login-banner__item banner-3">
-                <div className="login-banner__container" style={{ height: '100%' }}></div>
+                <div
+                  className="login-banner__container"
+                  style={{ height: '100%' }}
+                ></div>
               </div>
             </Carousel>
           </div>
@@ -100,21 +107,31 @@ export default function SignUp() {
                 validateMessages={validateMessages}
               >
                 <Form.Item noStyle>
-                  <h2 className="login-form__headline">Sign Up for an Account</h2>
+                  <h2 className="login-form__headline">
+                    Sign Up for an Account
+                  </h2>
                 </Form.Item>
                 <Form.Item
                   name="username"
                   rules={[{ required: true }]}
                   validateTrigger={['onBlur']}
                 >
-                  <Input size="large" placeholder="Username" prefix={<UserOutlined />} />
+                  <Input
+                    size="large"
+                    placeholder="Username"
+                    prefix={<UserOutlined />}
+                  />
                 </Form.Item>
                 <Form.Item
                   name="email"
                   rules={[{ required: true, type: 'email' }]}
                   validateTrigger={['onChange', 'onBlur']}
                 >
-                  <Input size="large" placeholder="Email" prefix={<MailOutlined />} />
+                  <Input
+                    size="large"
+                    placeholder="Email"
+                    prefix={<MailOutlined />}
+                  />
                 </Form.Item>
                 <Form.Item
                   name="password"
@@ -126,7 +143,11 @@ export default function SignUp() {
                   ]}
                   validateTrigger={['onChange', 'onBlur']}
                 >
-                  <Input.Password size="large" placeholder="Password" prefix={<LockOutlined />} />
+                  <Input.Password
+                    size="large"
+                    placeholder="Password"
+                    prefix={<LockOutlined />}
+                  />
                 </Form.Item>
                 <Form.Item name="agreement" valuePropName="checked" noStyle>
                   <Checkbox className="login-form__agreement">
@@ -141,7 +162,12 @@ export default function SignUp() {
                   </Checkbox>
                 </Form.Item>
                 <Form.Item>
-                  <Button size="large" type="primary" htmlType="submit" className="login-form__button">
+                  <Button
+                    size="large"
+                    type="primary"
+                    htmlType="submit"
+                    className="login-form__button"
+                  >
                     Sign Up
                   </Button>
                 </Form.Item>
@@ -149,7 +175,9 @@ export default function SignUp() {
               <Divider plain>Or sign up with</Divider>
               <Space className="login__auth-connections" size="middle">
                 <Button icon={<i className="icon-google"></i>}>Google</Button>
-                <Button icon={<i className="icon-facebook"></i>}>Facebook</Button>
+                <Button icon={<i className="icon-facebook"></i>}>
+                  Facebook
+                </Button>
               </Space>
               <div className="login__helper-actions">
                 Already have an account? <Link to="/login">Log In</Link>
@@ -159,6 +187,5 @@ export default function SignUp() {
         </Content>
       </Layout>
     </>
-
   );
 }

@@ -11,7 +11,6 @@ const usage = [
     name: '餘電',
     itemStyle: {
       color: '#BFDBFE',
-
     },
   },
 ];
@@ -29,7 +28,7 @@ export default {
     left: 'center',
     bottom: '2%',
     textStyle: {
-      fontWeight: 'bold'
+      fontWeight: 'bold',
     },
     data: [
       {
@@ -37,16 +36,16 @@ export default {
         icon: 'circle',
         textStyle: {
           color: '#000',
-        }
+        },
       },
       {
         name: '餘電',
         icon: 'circle',
         textStyle: {
           color: '#69798f',
-        }
+        },
       },
-    ]
+    ],
   },
   series: [
     {
@@ -57,7 +56,7 @@ export default {
         show: false,
         position: 'center',
         formatter: (params) => {
-          return `${(params.percent).toFixed(1)}%`;
+          return `${params.percent.toFixed(1)}%`;
         },
         fontSize: 18,
         fontWeight: 'bold',
@@ -65,9 +64,9 @@ export default {
       emphasis: {
         label: {
           show: true,
-        }
+        },
       },
       data: usage,
-    }
-  ]
+    },
+  ],
 };

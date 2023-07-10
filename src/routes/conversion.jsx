@@ -1,24 +1,6 @@
 import { useContext } from 'react';
-import {
-  FilterOutlined,
-  UploadOutlined,
-  EllipsisOutlined,
-  InfoCircleOutlined,
-} from '@ant-design/icons';
-import {
-  Layout,
-  Card,
-  Space,
-  Row,
-  Col,
-  Button,
-  Tabs,
-  Table,
-  Tag,
-  Tooltip,
-  Dropdown,
-  Select,
-} from 'antd';
+import { FilterOutlined, UploadOutlined, EllipsisOutlined, InfoCircleOutlined } from '@ant-design/icons';
+import { Layout, Card, Space, Row, Col, Button, Tabs, Table, Tag, Tooltip, Dropdown, Select } from 'antd';
 import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts/core';
 import { SankeyChart, PieChart } from 'echarts/charts';
@@ -30,13 +12,7 @@ import monthlyConversionPowerTable from '../data/monthlyConversionPowerTable';
 import remainingPowerRateTable from '../data/remainingPowerRateTable';
 import totalRETable from '../data/totalRETable';
 
-echarts.use([
-  SankeyChart,
-  SVGRenderer,
-  TooltipComponent,
-  LegendComponent,
-  PieChart,
-]);
+echarts.use([SankeyChart, SVGRenderer, TooltipComponent, LegendComponent, PieChart]);
 
 import styles from '../styles/conversion.module.scss';
 import '../styles/conversion.scss';
@@ -123,39 +99,18 @@ const ExpandedRow = () => {
   const { type: siderType } = sider;
 
   const renderChart = async () => {
-    if (
-      monthlyConversionPowerRef.current &&
-      !monthlyConversionPowerChart.current
-    ) {
-      monthlyConversionPowerChart.current = await echarts.init(
-        monthlyConversionPowerRef.current,
-        null,
-        {
-          renderer: 'svg',
-        }
-      );
-      setTimeout(
-        () =>
-          monthlyConversionPowerChart.current.setOption(
-            monthlyConversionPowerTable
-          ),
-        200
-      );
+    if (monthlyConversionPowerRef.current && !monthlyConversionPowerChart.current) {
+      monthlyConversionPowerChart.current = await echarts.init(monthlyConversionPowerRef.current, null, {
+        renderer: 'svg',
+      });
+      setTimeout(() => monthlyConversionPowerChart.current.setOption(monthlyConversionPowerTable), 200);
     }
 
     if (remainingPowerRateRef.current && !remainingPowerRateChart.current) {
-      remainingPowerRateChart.current = await echarts.init(
-        remainingPowerRateRef.current,
-        null,
-        {
-          renderer: 'svg',
-        }
-      );
-      setTimeout(
-        () =>
-          remainingPowerRateChart.current.setOption(remainingPowerRateTable),
-        200
-      );
+      remainingPowerRateChart.current = await echarts.init(remainingPowerRateRef.current, null, {
+        renderer: 'svg',
+      });
+      setTimeout(() => remainingPowerRateChart.current.setOption(remainingPowerRateTable), 200);
     }
 
     if (totalRERef.current && !totalREChart.current) {
@@ -198,13 +153,8 @@ const ExpandedRow = () => {
             <div className="ead-justify-grid conversion-chart__header">
               <div className="ead-justify-grid__col ead-justify-grid__col--left">
                 <div className="conversion-chart__headline">
-                  <span className="conversion-chart__headline-text">
-                    月結轉供電量
-                  </span>
-                  <Tooltip
-                    className="conversion-chart__tooltip"
-                    title="說明文字說明文字"
-                  >
+                  <span className="conversion-chart__headline-text">月結轉供電量</span>
+                  <Tooltip className="conversion-chart__tooltip" title="說明文字說明文字">
                     <InfoCircleOutlined />
                   </Tooltip>
                 </div>
@@ -223,10 +173,7 @@ const ExpandedRow = () => {
               </div>
             </div>
             <div className="conversion-chart__body">
-              <div
-                className={clsx(styles.monthlyConversionPower)}
-                ref={monthlyConversionPowerRef}
-              ></div>
+              <div className={clsx(styles.monthlyConversionPower)} ref={monthlyConversionPowerRef}></div>
             </div>
           </div>
         </Col>
@@ -235,13 +182,8 @@ const ExpandedRow = () => {
             <div className="ead-justify-grid conversion-chart__header">
               <div className="ead-justify-grid__col ead-justify-grid__col--left">
                 <div className="conversion-chart__headline">
-                  <span className="conversion-chart__headline-text">
-                    餘電率
-                  </span>
-                  <Tooltip
-                    className="conversion-chart__tooltip"
-                    title="說明文字說明文字"
-                  >
+                  <span className="conversion-chart__headline-text">餘電率</span>
+                  <Tooltip className="conversion-chart__tooltip" title="說明文字說明文字">
                     <InfoCircleOutlined />
                   </Tooltip>
                 </div>
@@ -260,10 +202,7 @@ const ExpandedRow = () => {
               </div>
             </div>
             <div className="conversion-chart__body">
-              <div
-                className={styles.donutChart}
-                ref={remainingPowerRateRef}
-              ></div>
+              <div className={styles.donutChart} ref={remainingPowerRateRef}></div>
             </div>
           </div>
         </Col>
@@ -273,10 +212,7 @@ const ExpandedRow = () => {
               <div className="ead-justify-grid__col ead-justify-grid__col--left">
                 <div className="conversion-chart__headline">
                   <span className="conversion-chart__headline-text">RE</span>
-                  <Tooltip
-                    className="conversion-chart__tooltip"
-                    title="說明文字說明文字"
-                  >
+                  <Tooltip className="conversion-chart__tooltip" title="說明文字說明文字">
                     <InfoCircleOutlined />
                   </Tooltip>
                 </div>
@@ -314,8 +250,7 @@ export default function Conversion() {
           <Table
             className="conversion-table conversion-table--expandable"
             expandable={{
-              expandedRowClassName: (record) =>
-                'conversion-table__expanded-item',
+              expandedRowClassName: (record) => 'conversion-table__expanded-item',
               expandedRowRender: (record, index) => <ExpandedRow />,
               expandIcon: ({ expanded, onExpand, record }) =>
                 expanded ? (
@@ -337,11 +272,7 @@ export default function Conversion() {
             dataSource={contractTableData}
             rowKey={(record) => record.key}
           >
-            <Column
-              title="契約單號"
-              dataIndex="contract-number"
-              key="contract-number"
-            />
+            <Column title="契約單號" dataIndex="contract-number" key="contract-number" />
             <Column title="案廠名稱" dataIndex="factory" key="factory" />
             <Column title="起算時間" dataIndex="date" key="date" />
             <Column
@@ -410,11 +341,7 @@ export default function Conversion() {
               key="more"
               render={() => (
                 <Dropdown menu={{ items: dropdownActions }} trigger={['click']}>
-                  <Button
-                    className="conversion-table__more-button"
-                    type="text"
-                    icon={<EllipsisOutlined />}
-                  />
+                  <Button className="conversion-table__more-button" type="text" icon={<EllipsisOutlined />} />
                 </Dropdown>
               )}
             />
@@ -449,11 +376,7 @@ export default function Conversion() {
     <>
       <Layout className="conversion">
         <Content className="conversion-container">
-          <Tabs
-            items={tabItems}
-            defaultActiveKey="contract"
-            tabBarExtraContent={RightOperations}
-          />
+          <Tabs items={tabItems} defaultActiveKey="contract" tabBarExtraContent={RightOperations} />
         </Content>
       </Layout>
     </>

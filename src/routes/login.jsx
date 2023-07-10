@@ -1,14 +1,5 @@
 import { MailOutlined, LockOutlined } from '@ant-design/icons';
-import {
-  Layout,
-  Space,
-  Carousel,
-  Button,
-  Divider,
-  Form,
-  Input,
-  message,
-} from 'antd';
+import { Layout, Space, Carousel, Button, Divider, Form, Input, message } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, Link } from 'react-router-dom';
 
@@ -26,9 +17,7 @@ export default function Login() {
   const onFinish = async (values) => {
     const { email, password } = values;
     const users = await getUsers();
-    const matchUser = users.find(
-      (u) => u.email === email && u.password === password
-    );
+    const matchUser = users.find((u) => u.email === email && u.password === password);
     if (matchUser) {
       dispatch(setUserInfo(matchUser));
       dispatch(setLogin(true));
@@ -63,22 +52,13 @@ export default function Login() {
         <div className="login-container__left">
           <Carousel className="login-banner">
             <div className="login-banner__item banner-1">
-              <div
-                className="login-banner__container"
-                style={{ height: '100%' }}
-              ></div>
+              <div className="login-banner__container" style={{ height: '100%' }}></div>
             </div>
             <div className="login-banner__item banner-2">
-              <div
-                className="login-banner__container"
-                style={{ height: '100%' }}
-              ></div>
+              <div className="login-banner__container" style={{ height: '100%' }}></div>
             </div>
             <div className="login-banner__item banner-3">
-              <div
-                className="login-banner__container"
-                style={{ height: '100%' }}
-              ></div>
+              <div className="login-banner__container" style={{ height: '100%' }}></div>
             </div>
           </Carousel>
         </div>
@@ -108,30 +88,13 @@ export default function Login() {
                 ]}
                 validateTrigger={['onChange', 'onBlur']}
               >
-                <Input
-                  size="large"
-                  placeholder="Email"
-                  prefix={<MailOutlined />}
-                />
+                <Input size="large" placeholder="Email" prefix={<MailOutlined />} />
               </Form.Item>
-              <Form.Item
-                name="password"
-                rules={[{ required: true }]}
-                validateTrigger={['onBlur']}
-              >
-                <Input.Password
-                  size="large"
-                  placeholder="Password"
-                  prefix={<LockOutlined />}
-                />
+              <Form.Item name="password" rules={[{ required: true }]} validateTrigger={['onBlur']}>
+                <Input.Password size="large" placeholder="Password" prefix={<LockOutlined />} />
               </Form.Item>
               <Form.Item>
-                <Button
-                  size="large"
-                  type="primary"
-                  htmlType="submit"
-                  className="login-form__button"
-                >
+                <Button size="large" type="primary" htmlType="submit" className="login-form__button">
                   Sign In
                 </Button>
               </Form.Item>

@@ -5,18 +5,18 @@ export default {
     axisPointer: {
       type: 'cross',
       label: {
-        backgroundColor: '#6a7985'
-      }
-    }
+        backgroundColor: '#6a7985',
+      },
+    },
   },
   legend: {
-    data: ['Load', 'Wind', 'Solar PV']
+    data: ['Load', 'Wind', 'Solar PV'],
   },
   grid: {
     left: '2%',
     right: '2%',
     bottom: '6%',
-    containLabel: true
+    containLabel: true,
   },
   xAxis: [
     {
@@ -26,7 +26,7 @@ export default {
         return `${String(i + 6).padStart(2, 0)}:00`;
       }),
       splitLine: {
-        show: true
+        show: true,
       },
     },
   ],
@@ -36,7 +36,7 @@ export default {
       min: 0,
       max: 100,
       interval: 25,
-    }
+    },
   ],
   series: [
     {
@@ -45,9 +45,9 @@ export default {
       smooth: true,
       areaStyle: {},
       emphasis: {
-        focus: 'series'
+        focus: 'series',
       },
-      data: [50, 60, 70, 20, 30, 70, 80, 90, 70, 20, 30, 50, 80]
+      data: [50, 60, 70, 20, 30, 70, 80, 90, 70, 20, 30, 50, 80],
     },
     {
       name: 'Wind',
@@ -55,9 +55,9 @@ export default {
       smooth: true,
       areaStyle: {},
       emphasis: {
-        focus: 'series'
+        focus: 'series',
       },
-      data: [40, 42, 45, 20, 15, 10, 5, 10, 5, 35, 10, 35, 75]
+      data: [40, 42, 45, 20, 15, 10, 5, 10, 5, 35, 10, 35, 75],
     },
     {
       name: 'Solar PV',
@@ -65,9 +65,9 @@ export default {
       smooth: true,
       areaStyle: {},
       emphasis: {
-        focus: 'series'
+        focus: 'series',
       },
-      data: [10, 18, 25, 40, 45, 60, 88, 80, 65, 55, 20, 15, 5]
+      data: [10, 18, 25, 40, 45, 60, 88, 80, 65, 55, 20, 15, 5],
     },
-  ]
-}
+  ],
+};

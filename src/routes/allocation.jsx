@@ -12,22 +12,8 @@ import {
   GeoComponent,
 } from 'echarts/components';
 
-import {
-  Row,
-  Col,
-  Card,
-  Dropdown,
-  Select,
-  Tooltip,
-  DatePicker,
-  Button,
-  Tag,
-} from 'antd';
-import {
-  InfoCircleOutlined,
-  ArrowsAltOutlined,
-  EllipsisOutlined,
-} from '@ant-design/icons';
+import { Row, Col, Card, Dropdown, Select, Tooltip, DatePicker, Button, Tag } from 'antd';
+import { InfoCircleOutlined, ArrowsAltOutlined, EllipsisOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import clsx from 'clsx';
 
@@ -129,20 +115,13 @@ export default function Allocation() {
   const { type: siderType } = sider;
 
   const renderChart = async () => {
-    if (
-      monthlyConversionPowerRef.current &&
-      !monthlyConversionPowerChart.current
-    ) {
-      monthlyConversionPowerChart.current = await echarts.init(
-        monthlyConversionPowerRef.current
-      );
+    if (monthlyConversionPowerRef.current && !monthlyConversionPowerChart.current) {
+      monthlyConversionPowerChart.current = await echarts.init(monthlyConversionPowerRef.current);
       monthlyConversionPowerChart.current.setOption(monthlyConversionPower);
     }
 
     if (remainingPowerRateRef.current && !remainingPowerRateChart.current) {
-      remainingPowerRateChart.current = await echarts.init(
-        remainingPowerRateRef.current
-      );
+      remainingPowerRateChart.current = await echarts.init(remainingPowerRateRef.current);
       remainingPowerRateChart.current.setOption(remainingPowerRate);
     }
 
@@ -215,16 +194,7 @@ export default function Allocation() {
       <Row className={styles.summaryRow}>
         {summary.map((item, key) => {
           return (
-            <Col
-              xs={24}
-              sm={12}
-              md={12}
-              lg={6}
-              xl={6}
-              xxl={6}
-              className={styles.items}
-              key={key}
-            >
+            <Col xs={24} sm={12} md={12} lg={6} xl={6} xxl={6} className={styles.items} key={key}>
               <div className={styles.item}>
                 <div className={styles.itemHeader}>
                   <div className={styles.itemLabel}>{item.label}</div>
@@ -234,16 +204,11 @@ export default function Allocation() {
                   <span className={styles.itemAmount}>
                     {item.unit} {item.amount.toLocaleString('en')}
                   </span>
-                  <Tag
-                    className={styles.itemRate}
-                    color={item.modifier == '<' ? 'error' : 'success'}
-                  >
+                  <Tag className={styles.itemRate} color={item.modifier == '<' ? 'error' : 'success'}>
                     {item.modifier == '<' ? '↓' : '↑'} {item.rate}%
                   </Tag>
                 </div>
-                <div className={styles.itemPast}>
-                  過去一個月 {item.pastAmount}
-                </div>
+                <div className={styles.itemPast}>過去一個月 {item.pastAmount}</div>
               </div>
             </Col>
           );
@@ -256,10 +221,7 @@ export default function Allocation() {
             title={
               <div className={styles.titleCol}>
                 <span className={styles.titleText}>月結轉供電量</span>
-                <Tooltip
-                  className={styles.titleTooltip}
-                  title="說明文字說明文字"
-                >
+                <Tooltip className={styles.titleTooltip} title="說明文字說明文字">
                   <InfoCircleOutlined />
                 </Tooltip>
               </div>
@@ -284,10 +246,7 @@ export default function Allocation() {
               />
             }
           >
-            <div
-              className={styles.sankeyChart}
-              ref={monthlyConversionPowerRef}
-            ></div>
+            <div className={styles.sankeyChart} ref={monthlyConversionPowerRef}></div>
           </Card>
         </Col>
         <Col xs={24} sm={12} md={12} lg={7} xl={6} xxl={6}>
@@ -296,10 +255,7 @@ export default function Allocation() {
             title={
               <div className={styles.titleCol}>
                 <span className={styles.titleText}>總餘電率 %</span>
-                <Tooltip
-                  className={styles.titleTooltip}
-                  title="說明文字說明文字"
-                >
+                <Tooltip className={styles.titleTooltip} title="說明文字說明文字">
                   <InfoCircleOutlined />
                 </Tooltip>
               </div>
@@ -309,19 +265,13 @@ export default function Allocation() {
                 placeholder="月"
                 style={{ width: 60 }}
                 options={Array.from(Array(12).keys()).reduce(
-                  (prev, curr) => [
-                    ...prev,
-                    { value: curr, label: `${curr + 1}月` },
-                  ],
+                  (prev, curr) => [...prev, { value: curr, label: `${curr + 1}月` }],
                   []
                 )}
               />
             }
           >
-            <div
-              className={styles.donutChart}
-              ref={remainingPowerRateRef}
-            ></div>
+            <div className={styles.donutChart} ref={remainingPowerRateRef}></div>
           </Card>
         </Col>
         <Col xs={24} sm={12} md={12} lg={7} xl={6} xxl={6}>
@@ -330,10 +280,7 @@ export default function Allocation() {
             title={
               <div className={styles.titleCol}>
                 <span className={styles.titleText}>總 RE %</span>
-                <Tooltip
-                  className={styles.titleTooltip}
-                  title="說明文字說明文字"
-                >
+                <Tooltip className={styles.titleTooltip} title="說明文字說明文字">
                   <InfoCircleOutlined />
                 </Tooltip>
               </div>
@@ -343,10 +290,7 @@ export default function Allocation() {
                 placeholder="月"
                 style={{ width: 60 }}
                 options={Array.from(Array(12).keys()).reduce(
-                  (prev, curr) => [
-                    ...prev,
-                    { value: curr, label: `${curr + 1}月` },
-                  ],
+                  (prev, curr) => [...prev, { value: curr, label: `${curr + 1}月` }],
                   []
                 )}
               />
@@ -363,29 +307,19 @@ export default function Allocation() {
             title={
               <div className={styles.titleCol}>
                 <span className={styles.titleText}>綠電分析</span>
-                <Tooltip
-                  className={styles.titleTooltip}
-                  title="說明文字說明文字"
-                >
+                <Tooltip className={styles.titleTooltip} title="說明文字說明文字">
                   <InfoCircleOutlined />
                 </Tooltip>
               </div>
             }
             extra={
               <Dropdown menu={{ items: dropdownActions }} trigger={['click']}>
-                <Button
-                  className={styles.moreButton}
-                  type="text"
-                  icon={<EllipsisOutlined />}
-                />
+                <Button className={styles.moreButton} type="text" icon={<EllipsisOutlined />} />
               </Dropdown>
             }
           >
             <div className={styles.greenPowerChart}>
-              <div
-                className={styles.greenPowerChartWrap}
-                ref={greenPowerRef}
-              ></div>
+              <div className={styles.greenPowerChartWrap} ref={greenPowerRef}></div>
             </div>
           </Card>
         </Col>
@@ -395,21 +329,14 @@ export default function Allocation() {
             title={
               <div className={styles.titleCol}>
                 <span className={styles.titleText}>全球綠電</span>
-                <Tooltip
-                  className={styles.titleTooltip}
-                  title="說明文字說明文字"
-                >
+                <Tooltip className={styles.titleTooltip} title="說明文字說明文字">
                   <InfoCircleOutlined />
                 </Tooltip>
               </div>
             }
             extra={
               <Dropdown menu={{ items: dropdownActions }} trigger={['click']}>
-                <Button
-                  className={styles.moreButton}
-                  type="text"
-                  icon={<EllipsisOutlined />}
-                />
+                <Button className={styles.moreButton} type="text" icon={<EllipsisOutlined />} />
               </Dropdown>
             }
           >

@@ -29,11 +29,15 @@ export default {
     formatter: () => {
       return `
         <div style="color:#ffffff;font-size:10px;">轉供比例</div>
-        ${sources.map(item => `<div style="color:${item.itemStyle.color};font-weight:bold;">${item.name}: ${item.value}%</div>`).join('')}
+        ${sources
+          .map(
+            (item) => `<div style="color:${item.itemStyle.color};font-weight:bold;">${item.name}: ${item.value}%</div>`
+          )
+          .join('')}
       `;
     },
     backgroundColor: 'rgba(0,0,0,.8)',
-    extraCssText: 'border-radius:10px;'
+    extraCssText: 'border-radius:10px;',
   },
   series: {
     type: 'sankey',
@@ -227,6 +231,6 @@ export default {
     lineStyle: {
       color: 'gradient',
       opacity: 0.4,
-    }
-  }
+    },
+  },
 };

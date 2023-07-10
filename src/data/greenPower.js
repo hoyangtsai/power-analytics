@@ -1,4 +1,4 @@
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 export default {
   color: ['#2463EB', '#38BDF9', '#DCE8FE'],
   aria: {
@@ -13,7 +13,7 @@ export default {
       { name: '太陽能', icon: 'circle' },
       { name: '風電', icon: 'circle' },
       { name: '灰電', icon: 'circle' },
-    ]
+    ],
   },
   tooltip: {},
   dataset: {
@@ -26,7 +26,7 @@ export default {
       { Date: dayjs('2022/10/31').format('MMM D'), 太陽能: 780000, 風電: 630000, 灰電: 580000 },
       // { Date: dayjs('2022/11/30').format('MMM D'), 太陽能: 620000, 風電: 290000, 灰電: 500000 },
       // { Date: dayjs('2022/12/31').format('MMM D'), 太陽能: 1000000, 風電: 820000, 灰電: 640000 },
-    ]
+    ],
   },
   xAxis: {
     type: 'category',
@@ -38,9 +38,9 @@ export default {
     axisLabel: {
       formatter: (value) => {
         if (value >= 1000000) {
-          return `${parseFloat(value / 1000000).toFixed(1)}M`
+          return `${parseFloat(value / 1000000).toFixed(1)}M`;
         } else if (value >= 1000) {
-          return `${parseFloat(value / 1000).toFixed(0)}K`
+          return `${parseFloat(value / 1000).toFixed(0)}K`;
         }
         return value;
       },
@@ -53,22 +53,22 @@ export default {
       type: 'bar',
       barWidth: 15,
       itemStyle: {
-        borderRadius: [6, 6, 0, 0]
+        borderRadius: [6, 6, 0, 0],
       },
     },
     {
       type: 'bar',
       barWidth: 15,
       itemStyle: {
-        borderRadius: [6, 6, 0, 0]
+        borderRadius: [6, 6, 0, 0],
       },
     },
     {
       type: 'bar',
       barWidth: 15,
       itemStyle: {
-        borderRadius: [6, 6, 0, 0]
+        borderRadius: [6, 6, 0, 0],
       },
     },
-  ]
-}
+  ],
+};

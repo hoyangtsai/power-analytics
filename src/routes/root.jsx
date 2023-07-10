@@ -1,16 +1,6 @@
 import React, { useCallback, useState, createContext } from 'react';
 import { Outlet, NavLink, Navigate, useLocation } from 'react-router-dom';
-import {
-  Layout,
-  Menu,
-  Input,
-  Dropdown,
-  Avatar,
-  Badge,
-  Button,
-  Popover,
-  Empty,
-} from 'antd';
+import { Layout, Menu, Input, Dropdown, Avatar, Badge, Button, Popover, Empty } from 'antd';
 import {
   AppstoreFilled,
   BarChartOutlined,
@@ -159,17 +149,13 @@ export default function Root() {
 
   const getMenuSelectKey = () => {
     const rootPages = routers[0].children;
-    const pageIndex = rootPages.findIndex((p) =>
-      location.pathname.includes(p.path)
-    );
+    const pageIndex = rootPages.findIndex((p) => location.pathname.includes(p.path));
     return pageIndex === -1 ? ['0'] : [String(pageIndex)];
   };
 
   const getHeaderTitle = () => {
     const rootPages = routers[0].children;
-    const currentPage = rootPages.find((p) =>
-      location.pathname.includes(p.path)
-    );
+    const currentPage = rootPages.find((p) => location.pathname.includes(p.path));
     if (currentPage) {
       return (
         <>
@@ -238,28 +224,15 @@ export default function Root() {
               </div>
               <div className="ead-justify-grid__col ead-justify-grid__col--right">
                 <div className="ead-navbar__operation">
-                  <Search
-                    className="ead-navbar__operation-item ead-search"
-                    placeholder="Search anything"
-                    allowClear
-                  />
+                  <Search className="ead-navbar__operation-item ead-search" placeholder="Search anything" allowClear />
                   <Popover
                     className="ead-navbar__operation-item ead-navbar__popover notifications-list"
-                    content={
-                      <Empty
-                        image={Empty.PRESENTED_IMAGE_SIMPLE}
-                        description="暫無通知"
-                      />
-                    }
+                    content={<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="暫無通知" />}
                     placement="bottom"
                     trigger="click"
                   >
                     <Badge>
-                      <Button
-                        className="notifications-list__button"
-                        type="text"
-                        icon={<BellOutlined />}
-                      />
+                      <Button className="notifications-list__button" type="text" icon={<BellOutlined />} />
                     </Badge>
                   </Popover>
                   <Dropdown

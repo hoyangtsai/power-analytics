@@ -29,13 +29,13 @@ export default {
     bottom: '2%',
     width: '50%',
     formatter: (name) => {
-      const item = usages.find(i => i.name === name);
-      return `${name}: ${(item.value).toLocaleString('en-US')} kWh`;
+      const item = usages.find((i) => i.name === name);
+      return `${name}: ${item.value.toLocaleString('en-US')} kWh`;
     },
     data: [
       { name: '總用電量', icon: 'circle' },
       { name: '灰電', icon: 'circle' },
-    ]
+    ],
   },
   series: [
     {
@@ -47,7 +47,7 @@ export default {
         show: false,
         position: 'center',
         formatter: (params) => {
-          return `${(params.percent).toFixed(1)}%`;
+          return `${params.percent.toFixed(1)}%`;
         },
         fontSize: 18,
         fontWeight: 'bold',
@@ -55,9 +55,9 @@ export default {
       emphasis: {
         label: {
           show: true,
-        }
+        },
       },
       data: usages,
-    }
-  ]
+    },
+  ],
 };

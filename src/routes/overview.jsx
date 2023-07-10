@@ -17,19 +17,7 @@ import {
   GoldOutlined,
   FundOutlined,
 } from '@ant-design/icons';
-import {
-  Row,
-  Col,
-  Card,
-  Button,
-  DatePicker,
-  Dropdown,
-  Select,
-  Segmented,
-  Table,
-  Tag,
-  Tooltip,
-} from 'antd';
+import { Row, Col, Card, Button, DatePicker, Dropdown, Select, Segmented, Table, Tag, Tooltip } from 'antd';
 
 echarts.use([LineChart, CanvasRenderer, TooltipComponent, LegendComponent]);
 
@@ -179,9 +167,7 @@ const dropdownActions = [
 export default function Overview() {
   const powerMixRef = useRef(null);
   const powerMixChart = useRef(null);
-  const [powerMixDefaultDate, setPowerMixDefaultDate] = useState(
-    dayjs('2022/01/02')
-  );
+  const [powerMixDefaultDate, setPowerMixDefaultDate] = useState(dayjs('2022/01/02'));
   const conversionPowerRef = useRef(null);
   const conversionPowerChart = useRef(null);
   const [width, height] = useWindowSize();
@@ -197,9 +183,7 @@ export default function Overview() {
       powerMixChart.current.setOption(powerMix);
     }
     if (conversionPowerRef.current && !conversionPowerChart.current) {
-      conversionPowerChart.current = await echarts.init(
-        conversionPowerRef.current
-      );
+      conversionPowerChart.current = await echarts.init(conversionPowerRef.current);
       conversionPowerChart.current.setOption(conversionPower);
     }
   };
@@ -232,9 +216,7 @@ export default function Overview() {
   // 廠區電力資料
   const weekFormat = 'MM/DD';
   const customWeekStartEndFormat = (value) =>
-    `${dayjs(value).startOf('week').format(weekFormat)} ~ ${dayjs(value)
-      .endOf('week')
-      .format(weekFormat)}`;
+    `${dayjs(value).startOf('week').format(weekFormat)} ~ ${dayjs(value).endOf('week').format(weekFormat)}`;
 
   const { Column } = Table;
 
@@ -253,10 +235,7 @@ export default function Overview() {
                       {item.unit} {item.amount.toLocaleString('en')}
                     </span>
                     {item.rate != 0 ? (
-                      <Tag
-                        className={styles.itemRate}
-                        color={item.modifier == '<' ? 'error' : 'success'}
-                      >
+                      <Tag className={styles.itemRate} color={item.modifier == '<' ? 'error' : 'success'}>
                         {item.modifier == '<' ? '↓' : '↑'} {item.rate}%
                       </Tag>
                     ) : null}
@@ -275,10 +254,7 @@ export default function Overview() {
             extra={
               <div className={styles.actions}>
                 <div className={styles.ranges}>
-                  <Segmented
-                    className={styles.rangeButton}
-                    options={['Day', 'Month', 'Year']}
-                  />
+                  <Segmented className={styles.rangeButton} options={['Day', 'Month', 'Year']} />
                 </div>
                 <div className={styles.datePicker}>
                   <Button
@@ -286,11 +262,7 @@ export default function Overview() {
                     icon={<LeftOutlined />}
                     onClick={() => handlePowerMixDateShift(-1)}
                   />
-                  <DatePicker
-                    className={styles.datePickerInput}
-                    value={powerMixDefaultDate}
-                    suffixIcon={null}
-                  />
+                  <DatePicker className={styles.datePickerInput} value={powerMixDefaultDate} suffixIcon={null} />
                   <Button
                     className={styles.nextButton}
                     icon={<RightOutlined />}
@@ -320,19 +292,13 @@ export default function Overview() {
                 className={styles.selectWeek}
                 placeholder="週"
                 options={[...Array(52).keys()].reduce(
-                  (prev, curr) => [
-                    ...prev,
-                    { value: curr + 1, label: curr + 1 },
-                  ],
+                  (prev, curr) => [...prev, { value: curr + 1, label: curr + 1 }],
                   []
                 )}
               />
             }
           >
-            <div
-              className={styles.conversionPowerChart}
-              ref={conversionPowerRef}
-            ></div>
+            <div className={styles.conversionPowerChart} ref={conversionPowerRef}></div>
           </Card>
         </Col>
       </Row>
@@ -341,13 +307,7 @@ export default function Overview() {
           <Card
             className={styles.overviewCard}
             title="廠區電力資料"
-            extra={
-              <DatePicker
-                defaultValue={dayjs()}
-                format={customWeekStartEndFormat}
-                picker="week"
-              />
-            }
+            extra={<DatePicker defaultValue={dayjs()} format={customWeekStartEndFormat} picker="week" />}
           >
             <Table
               className="ead-table"
@@ -374,12 +334,7 @@ export default function Overview() {
                   </div>
                 )}
               />
-              <Column
-                title="方案類型"
-                dataIndex="type"
-                key="type"
-                ellipsis={{ showTitle: false }}
-              />
+              <Column title="方案類型" dataIndex="type" key="type" ellipsis={{ showTitle: false }} />
               <Column
                 title="電號"
                 dataIndex="no"
@@ -391,18 +346,8 @@ export default function Overview() {
                   </Tooltip>
                 )}
               />
-              <Column
-                title="kWh"
-                dataIndex="kWh"
-                key="kWh"
-                ellipsis={{ showTitle: false }}
-              />
-              <Column
-                title="電價"
-                dataIndex="price"
-                key="price"
-                ellipsis={{ showTitle: false }}
-              />
+              <Column title="kWh" dataIndex="kWh" key="kWh" ellipsis={{ showTitle: false }} />
+              <Column title="電價" dataIndex="price" key="price" ellipsis={{ showTitle: false }} />
               <Column
                 className="ead-table__actions"
                 title={<EllipsisOutlined />}
@@ -410,15 +355,8 @@ export default function Overview() {
                 dataIndex="more"
                 key="more"
                 render={() => (
-                  <Dropdown
-                    menu={{ items: dropdownActions }}
-                    trigger={['click']}
-                  >
-                    <Button
-                      className="ead-table__more-button"
-                      type="text"
-                      icon={<EllipsisOutlined />}
-                    />
+                  <Dropdown menu={{ items: dropdownActions }} trigger={['click']}>
+                    <Button className="ead-table__more-button" type="text" icon={<EllipsisOutlined />} />
                   </Dropdown>
                 )}
               />
@@ -431,20 +369,14 @@ export default function Overview() {
             title="綠能總結"
             extra={
               <Dropdown menu={{ items: dropdownActions }} trigger={['click']}>
-                <Button
-                  className={styles.moreButton}
-                  type="text"
-                  icon={<EllipsisOutlined />}
-                />
+                <Button className={styles.moreButton} type="text" icon={<EllipsisOutlined />} />
               </Dropdown>
             }
           >
             <div className={styles.greenPowerWrap}>
               <Row gutter={[16, 16]} className={styles.greenPowerItems}>
                 <Col span={8}>
-                  <Card
-                    className={clsx(styles.greenPowerItem, styles.surplusPower)}
-                  >
+                  <Card className={clsx(styles.greenPowerItem, styles.surplusPower)}>
                     <div className={styles.GPHeader}>
                       <i className={styles.GPIcon}>
                         <GoldOutlined />
@@ -470,9 +402,7 @@ export default function Overview() {
                   </Card>
                 </Col>
                 <Col span={8}>
-                  <Card
-                    className={clsx(styles.greenPowerItem, styles.grayPower)}
-                  >
+                  <Card className={clsx(styles.greenPowerItem, styles.grayPower)}>
                     <div className={styles.GPHeader}>
                       <i className={styles.GPIcon}>
                         <FundOutlined />

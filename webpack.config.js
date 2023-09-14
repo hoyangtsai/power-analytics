@@ -1,12 +1,12 @@
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const TerserPlugin = require('terser-webpack-plugin')
-const openBrowser = require('react-dev-utils/openBrowser')
-const ESLintPlugin = require('eslint-webpack-plugin')
-const webpack = require('webpack')
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const openBrowser = require('react-dev-utils/openBrowser');
+const ESLintPlugin = require('eslint-webpack-plugin');
+const webpack = require('webpack');
 
-require('dotenv').config()
+require('dotenv').config();
 
 const publicUrl = process.env.PUBLIC_URL || '';
 
@@ -22,7 +22,7 @@ module.exports = (env, argv) => {
       filename: isDevelopment ? '[name].js' : '[name].[contenthash:8].bundle.js',
       chunkFilename: isDevelopment ? '[name].js' : '[name].[contenthash:8].js',
       assetModuleFilename: '[contenthash:8][ext]',
-      publicPath: publicUrl
+      publicPath: publicUrl,
     },
     // webpack 5 comes with devServer which loads in development mode
     devServer: {
@@ -49,13 +49,13 @@ module.exports = (env, argv) => {
               options: {
                 cacheDirectory: true,
                 cacheCompression: false,
-              }
+              },
             },
-          ]
+          ],
         },
         {
           test: /\.css$/,
-          use: ['style-loader', 'css-loader']
+          use: ['style-loader', 'css-loader'],
         },
         {
           test: /\.module\.s(a|c)ss$/,
@@ -65,26 +65,24 @@ module.exports = (env, argv) => {
               loader: 'css-loader',
               options: {
                 modules: true,
-                sourceMap: isDevelopment
-              }
+                sourceMap: isDevelopment,
+              },
             },
             {
               loader: 'postcss-loader',
               options: {
                 postcssOptions: {
-                  plugins: [
-                    ['autoprefixer']
-                  ]
-                }
-              }
+                  plugins: [['autoprefixer']],
+                },
+              },
             },
             {
               loader: 'sass-loader',
               options: {
-                sourceMap: isDevelopment
-              }
-            }
-          ]
+                sourceMap: isDevelopment,
+              },
+            },
+          ],
         },
         {
           test: /\.s(a|c)ss$/,
@@ -96,25 +94,23 @@ module.exports = (env, argv) => {
               loader: 'postcss-loader',
               options: {
                 postcssOptions: {
-                  plugins: [
-                    ['autoprefixer']
-                  ]
-                }
-              }
+                  plugins: [['autoprefixer']],
+                },
+              },
             },
             {
               loader: 'sass-loader',
               options: {
-                sourceMap: isDevelopment
-              }
-            }
-          ]
+                sourceMap: isDevelopment,
+              },
+            },
+          ],
         },
         {
           test: /\.(png|svg|jpg|jpeg|gif|json)$/i,
           type: 'asset/resource',
         },
-      ]
+      ],
     },
     optimization: {
       chunkIds: 'named',
@@ -124,7 +120,7 @@ module.exports = (env, argv) => {
             test: /[\\/]node_modules[\\/]/,
             name: 'vendor',
             priority: 10,
-            chunks: 'initial'
+            chunks: 'initial',
           },
           antd: {
             name: 'antd',
@@ -142,14 +138,11 @@ module.exports = (env, argv) => {
             name: 'commons',
             minChunks: 3, // minimum common number
             priority: 5,
-            reuseExistingChunk: true
+            reuseExistingChunk: true,
           },
           lib: {
             test(module) {
-              return (
-                module.size() > 160000 &&
-                /node_modules[/\\]/.test(module.nameForCondition() || '')
-              )
+              return module.size() > 160000 && /node_modules[/\\]/.test(module.nameForCondition() || '');
             },
             name(module) {
               const packageNameArr = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/);
@@ -181,24 +174,23 @@ module.exports = (env, argv) => {
       new HtmlWebpackPlugin({
         title: 'Power Analytics',
         template: './src/index.html',
-        favicon: path.resolve(__dirname, 'src/assets/icon/favicon.png')
+        favicon: path.resolve(__dirname, 'src/assets/icon/favicon.png'),
       }),
       new MiniCssExtractPlugin({
         filename: isDevelopment ? '[name].css' : '[name].[contenthash:8].css',
-        chunkFilename: isDevelopment ? '[id].css' : '[id].[contenthash:8].css'
+        chunkFilename: isDevelopment ? '[id].css' : '[id].[contenthash:8].css',
       }),
       new ESLintPlugin(),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify(argv.mode),
         'process.env.PUBLIC_URL': JSON.stringify(process.env.PUBLIC_URL),
-      })
+      }),
     ],
     resolve: {
       extensions: ['.js', '.jsx'],
       alias: {
         '@': path.resolve(__dirname, 'src'),
-      }
-    }
-  }
-}
-
+      },
+    },
+  };
+};
